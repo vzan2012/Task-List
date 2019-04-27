@@ -18,6 +18,10 @@ function loadEventListeners() {
 
   // Clear all the tasks
   clearBtn.addEventListener("click", clearTasks);
+
+  // Filter Task Events
+  filter.addEventListener("keyup", filterTasks);
+
 }
 
 // Adding the Task
@@ -52,7 +56,6 @@ function addTask(e) {
     // Clear the input field
     taskInput.value = "";
 
-    console.log(li);
   }
 
   e.preventDefault();
@@ -76,3 +79,26 @@ function clearTasks(e) {
     taskList.removeChild(taskList.firstChild);
   }
 }
+
+
+// Filter Tasks
+function filterTasks(e) {
+  const text = e.target.value.toLowerCase();
+
+  // console.log(text);
+
+  document.querySelectorAll('.collection-item').forEach(function(task){
+
+    // console.log(task);
+
+    const item = task.firstChild.textContent;
+
+    if(item.toLowerCase().indexOf(text) != -1) {
+      task.style.display = 'block';
+    } else {
+      task.style.display = 'none';
+    }
+
+  });
+}
+
